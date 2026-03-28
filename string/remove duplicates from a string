@@ -1,0 +1,22 @@
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    string str;
+    cout << "Enter string: ";
+    cin >> str;
+
+    set<char> seen;
+    string result = "";
+
+    for (char ch : str) {
+        if (seen.find(ch) == seen.end()) {
+            result += ch;
+            seen.insert(ch);
+        }
+    }
+
+    cout << "After removing duplicates: " << result;
+    return 0;
+}
