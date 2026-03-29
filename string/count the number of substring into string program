@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <unordered_set>
+using namespace std;
+
+bool allUnique(const string &s) {
+    unordered_set<char> seen;
+    for (char c : s) {
+        if (seen.count(c)) return false;
+        seen.insert(c);
+    }
+    return true;
+}
+
+int main() {
+    string s;
+    cout << "Enter a string: ";
+    cin >> s;
+
+    int n = s.length();
+    int count = 0;
+
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = i; j < n; j++) {
+            string sub = s.substr(i, j - i + 1);
+            if (allUnique(sub)) count++;
+        }
+    }
+
+    cout << "Number of substrings with all unique characters: " << count << endl;
+    return 0;
+}
