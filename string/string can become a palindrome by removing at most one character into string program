@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool isPalindrome(const string &s, int left, int right) {
+    while (left < right) {
+        if (s[left] != s[right])
+            return false;
+        left++;
+        right--;
+    }
+    return true;
+}
+
+bool validPalindrome(string s) {
+    int left = 0, right = s.length() - 1;
+    while (left < right) {
+        if (s[left] != s[right]) {
+        
+            return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+int main() {
+    string s;
+    cout << "Enter a string: ";
+    cin >> s;
+
+    if (validPalindrome(s))
+        cout << "Yes, it can become a palindrome by removing at most one character." << endl;
+    else
+        cout << "No, it cannot." << endl;
+
+    return 0;
+}
