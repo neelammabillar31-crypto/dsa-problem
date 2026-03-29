@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+bool isPalindrome(const string &s) {
+    int left = 0, right = s.length()-1;
+    while(left < right){
+        if(s[left++] != s[right--]) return false;
+    }
+    return true;
+}
+
+bool rotationalPalindrome(string s) {
+    int n = s.length();
+    string t = s;
+    for(int i = 0; i < n; i++){
+        if(isPalindrome(t)) return true;
+        
+        t = t.substr(1) + t[0];
+    }
+    return false;
+}
+
+int main() {
+    string s;
+    cout << "Enter a string: ";
+    cin >> s;
+
+    if(rotationalPalindrome(s))
+        cout << "Yes, it can become a palindrome after rotation." << endl;
+    else
+        cout << "No, it cannot." << endl;
+
+    return 0;
+}
