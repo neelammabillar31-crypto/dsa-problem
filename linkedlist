@@ -1,0 +1,53 @@
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+// Merge two sorted lists
+ListNode* merge(ListNode* l1, ListNode* l2) {
+    ListNode dummy(0);
+    ListNode* temp = &dummy;
+
+    while (l1 && l2) {
+        if (l1->val < l2->val) {
+            temp->next = l1;
+            l1 = l1->next;
+        } else {
+            temp->next = l2;
+            l2 = l2->next;
+        }
+        temp = temp->next;
+    }
+
+    if (l1) temp->next = l1;
+    if (l2) temp->next = l2;
+
+    return dummy.next;
+}
+
+// Main sort function
+ListNode* sortList(ListNode* head) {
+    if (!head || !head->next) return head;
+
+    // Find middle
+    ListNode* slow = head;
+    ListNode* fast = head;
+    ListNode* prev = NULL;
+
+    while (fast && fast->next) {
+        prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // Split list
+    prev->next = NULL;
+
+    // Sort both halves
+    ListNode* l1 = sortList(head);
+    ListNode* l2 = sortList(slow);
+
+    // Merge
+    return merge(l1, l2);
+}
