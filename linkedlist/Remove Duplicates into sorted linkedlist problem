@@ -1,0 +1,13 @@
+void removeDuplicates(struct Node* head) {
+    struct Node* temp = head;
+
+    while (temp != NULL && temp->next != NULL) {
+        if (temp->data == temp->next->data) {
+            struct Node* dup = temp->next;
+            temp->next = temp->next->next;
+            free(dup);
+        } else {
+            temp = temp->next;
+        }
+    }
+}
