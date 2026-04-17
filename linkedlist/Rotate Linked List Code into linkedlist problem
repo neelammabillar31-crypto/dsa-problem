@@ -1,0 +1,29 @@
+struct Node* rotateRight(struct Node* head, int k) {
+    if (head == NULL || head->next == NULL || k == 0)
+        return head;
+
+    struct Node* temp = head;
+    int length = 1;
+
+   
+    while (temp->next != NULL) {
+        temp = temp->next;
+        length++;
+    }
+
+    
+    temp->next = head;
+
+    k = k % length;
+    int steps = length - k;
+
+    while (steps--) {
+        temp = temp->next;
+    }
+
+    
+    struct Node* newHead = temp->next;
+    temp->next = NULL;
+
+    return newHead;
+}
