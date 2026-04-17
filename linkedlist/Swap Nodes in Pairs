@@ -1,0 +1,19 @@
+struct Node* swapPairs(struct Node* head) {
+    struct Node dummy;
+    dummy.next = head;
+    struct Node* prev = &dummy;
+
+    while (head && head->next) {
+        struct Node* first = head;
+        struct Node* second = head->next;
+
+        prev->next = second;
+        first->next = second->next;
+        second->next = first;
+
+        prev = first;
+        head = first->next;
+    }
+
+    return dummy.next;
+}
