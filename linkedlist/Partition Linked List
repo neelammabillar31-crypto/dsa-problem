@@ -1,0 +1,23 @@
+struct Node* partition(struct Node* head, int x) {
+    struct Node lessDummy, greaterDummy;
+    struct Node *less = &lessDummy, *greater = &greaterDummy;
+
+    less->next = NULL;
+    greater->next = NULL;
+
+    while (head) {
+        if (head->data < x) {
+            less->next = head;
+            less = less->next;
+        } else {
+            greater->next = head;
+            greater = greater->next;
+        }
+        head = head->next;
+    }
+
+    greater->next = NULL;
+    less->next = greaterDummy.next;
+
+    return lessDummy.next;
+}
