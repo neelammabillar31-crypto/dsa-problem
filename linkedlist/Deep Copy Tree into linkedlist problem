@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class TreeNode {
+public:
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+
+class Solution {
+public:
+
+    TreeNode* copyTree(TreeNode* root) {
+
+        
+        if(root == NULL)
+            return NULL;
+
+Create copied node
+        TreeNode* newNode = new TreeNode(root->val);
+
+        
+        newNode->left = copyTree(root->left);
+
+        
+        newNode->right = copyTree(root->right);
+
+        return newNode;
+    }
+};
