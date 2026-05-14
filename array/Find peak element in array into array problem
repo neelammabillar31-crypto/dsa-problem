@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for(int i = 0; i < n; i++) cin >> arr[i];
+
+    for(int i = 0; i < n; i++) {
+        bool leftOK = (i == 0 || arr[i] > arr[i-1]);
+        bool rightOK = (i == n-1 || arr[i] > arr[i+1]);
+
+        if(leftOK && rightOK) {
+            cout << "Peak Element: " << arr[i];
+            break;
+        }
+    }
+
+    return 0;
+}
