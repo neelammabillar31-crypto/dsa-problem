@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<pair<int,int>> intervals(n);
+
+    for(int i = 0; i < n; i++) {
+        cin >> intervals[i].first >> intervals[i].second;
+    }
+
+    
+    sort(intervals.begin(), intervals.end());
+
+    vector<pair<int,int>> result;
+
+    for(int i = 0; i < n; i++) {
+        
+        if(result.empty() || result.back().second < intervals[i].first) {
+            result.push_back(intervals[i]);
+        }
+        else {
+            
+            result.back().second = max(result.back().second, intervals[i].second);
+        }
+    }
+
+    
+    cout << "Merged Intervals: ";
+    for(auto it : result) {
+        cout << "[" << it.first << "," << it.second << "] ";
+    }
+
+    return 0;
+}
